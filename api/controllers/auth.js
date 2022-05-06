@@ -7,14 +7,14 @@ const { query } = require('../database/config')
 
 const login = async (req = request,res=response )  =>{
     
-    const { usuario,password } = req.body;
+    const { usuario, password, almacen } = req.body;
 
     try {
 
-        const usuarioDb = await query(`select * from usuario where user_ = "${ usuario }"`);
+        const usuarioDb = await query(`select * from usuario where user_ = "${ usuario }" and id_almacen=${ parseInt(almacen) }`);
         
         if(!usuarioDb[0]) return res.status(400).json({
-             msg:'El usuario no existe'
+             msg:'El usuario no existe o no tiene acceso a este almacen'
         })
 
         //Usuario activo

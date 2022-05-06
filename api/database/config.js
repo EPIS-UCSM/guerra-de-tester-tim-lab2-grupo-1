@@ -6,20 +6,20 @@ const config = {
     host:"localhost",
     user:"root",
     database:"inventario",
-    password:"admin123"
+    password:"admin123",
+    multipleStatements:true
 }
 
 const query = async (queryString = "select 1 + 1 ") =>{
    const connection = await mysql.createConnection(config);
-   
-   if(connection) console.log("Data base connected");
 
-   const [rows] = await connection.execute(queryString)
+   const [rows] = await connection.query(queryString)
    
    connection.end();
    
    return rows
 }
+
 
 module.exports = {
     query

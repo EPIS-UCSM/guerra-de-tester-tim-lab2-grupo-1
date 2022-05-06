@@ -21,12 +21,12 @@ module.exports={
     postUser: async (req = request, res = response) => {
         
         try {
-            const { nombre, usuario, password } = req.body
+            const { nombre, usuario, password, almacen } = req.body
 
             const salt = bcryptjs.genSaltSync()
             const password_ = bcryptjs.hashSync( password, salt )
         
-            await Usuario.registrar({ nombre, usuario, password_ })
+            await Usuario.registrar({ nombre, usuario, password_, almacen })
 
             return res.json({
                 msg:"Usuario registrado"

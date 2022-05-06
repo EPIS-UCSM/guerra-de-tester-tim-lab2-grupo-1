@@ -3,6 +3,9 @@ const express = require('express')
 const cors = require('cors');
 const routerAuth = require('../routes/auth');
 const routerUsers = require('../routes/users');
+const routerProducts = require('../routes/products');
+const routerSuppliers = require('../routes/supplier');
+const routerAlmacenes = require('../routes/almacen');
 
 
 class Server{
@@ -16,6 +19,9 @@ class Server{
         this.port = process.env.PORT || 5000;
         this.userPaths = '/api/usuarios';
         this.authPath = '/api/auth';
+        this.productsPath = '/api/productos';
+        this.proveedoresPath = '/api/proveedores';
+        this.almacenesPath = '/api/almacenes';
         this.indexPath = '/api';
 
         //Middlewares
@@ -42,6 +48,9 @@ class Server{
         })
         this.app.use(this.userPaths, routerUsers);
         this.app.use(this.authPath , routerAuth );
+        this.app.use(this.productsPath , routerProducts );
+        this.app.use(this.proveedoresPath , routerSuppliers );
+        this.app.use(this.almacenesPath , routerAlmacenes );
     }
 
     listen(){

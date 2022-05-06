@@ -4,10 +4,10 @@ const { query } = require("../database/config")
 module.exports = class {
     static async registrar(data = {}){
         try {
-            const {nombre, usuario, password_} = data
+            const {nombre, usuario, password_, almacen} = data
             await query(`
-                insert into usuario (nombre,user_,password_) 
-                values ("${ nombre }","${ usuario }","${ password_ }")`)
+                insert into usuario (nombre,user_,password_,id_almacen) 
+                values ("${ nombre }","${ usuario }","${ password_ }",${ almacen })`);
 
             return true
         } catch (error) {
@@ -57,5 +57,13 @@ module.exports = class {
         } catch (error) {
             
         }
+    }
+/////// TODO:
+    static async aumentarStock( id = '', almacen = ''){
+
+    }
+
+    static async reducirStock(id = '', almacen = ''){
+
     }
 }
