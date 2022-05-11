@@ -8,8 +8,12 @@ const Proveedor = require('../models/proveedor');
 //Validar usuario si no existe
 const existeUsuarioId = async( id = 0 )=>{
     
-    const existe = await Usuario.buscar( id )
-    if( !existe ) throw new Error (`No existe el usuario con id : ${ id }.`) 
+    try {
+        const existe = await Usuario.buscar( id )
+        if( !existe ) throw new Error (`No existe el usuario con id : ${ id }.`) 
+    } catch (error) {
+        throw new Error(`No existe el usuario con id : ${ id }.`)
+    }
 }
 
 const existeUsuario = async (user = '' ) => {
@@ -18,6 +22,7 @@ const existeUsuario = async (user = '' ) => {
 }
 
 const existeProductoId = async(id = '') => {
+
     const existe = await Producto.buscar(id);
     if(!existe) throw new Error(`El id del producto no existe en la base de datos`)
 }

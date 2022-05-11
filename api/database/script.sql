@@ -11,15 +11,18 @@ create table usuario(
     estado tinyint default 1
 );
 
+-- drop table producto
 create table producto(
 	id int primary key auto_increment,
     nombre varchar(100) not null,
     descripcion varchar(200),
-    unid_medida varchar(20),
+    unid_medida varchar(60),
     id_proveedor int not null,
-    estado tinyint default 1
+    estado tinyint default 1,
+    precio float
 );
 
+-- drop table proveedor
 create table proveedor(
 	id int primary key auto_increment,
     nombre varchar(100) not null,
@@ -32,6 +35,7 @@ create table almacen(
     direccion varchar(150)
 );
 
+-- drop table producto_almacen
 create table producto_almacen(
 	id int primary key auto_increment,
     id_producto int not null,

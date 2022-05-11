@@ -20,9 +20,9 @@ module.exports={
     postProduct: async (req = request, res = response) => {
         
         try {
-            const { nombre, descripcion, unidad, proveedor, almacen, stock } = req.body
+            const { nombre, descripcion, unidad, proveedor, almacen, stock, precio } = req.body
 
-            await Producto.registrar({ nombre, descripcion, unidad, proveedor, almacen, stock })
+            await Producto.registrar({ nombre, descripcion, unidad, proveedor, almacen, stock, precio })
 
             return res.json({
                 msg:"Producto registrado"
@@ -36,7 +36,21 @@ module.exports={
         
     },
     putProduct: async (req = request, res = response) => {
+        const { id } = req.params
+        const { nombre, descripcion, unidad, precio } = req.body
+        try {
 
+            await Producto.actualizar({ id, nombre, descripcion, unidad, precio })
+
+            return res.json({
+                msg:"Producto actualizado"
+            })
+
+        } catch (error) {
+            return res.status(400).json({
+                err:"Ocurrio un error al intentar registrar al producto hable con el administrador"
+            })
+        }
     },
 
     deleteProduct: async (req = request, res = response) => {
@@ -59,5 +73,21 @@ module.exports={
             })
         }
 
+    },
+    putStock: async (req = request, res=response) => {
+        
+        const { producto, almacen, cantidad } = req.body
+        try {
+            const user = await Producto.cambiarStock(producto, almacen, cantidad);
+
+            return res.json({
+                msg:"Stock actualizado"
+            })
+        } catch (error) {
+            return res.status(400).json({
+                err:"Ocurrio un error al intentar actualizar el stock hable con el administrador"
+            })
+        }
     }
+
 }
