@@ -11,8 +11,8 @@ const fetchData = async () => {
     if( user.value.length < 1 || password.value.length <1 || almacen.value==0 ){
         return alert("Llene todos los campos")
     }
-
-    const response = await fetch("http://localhost:5000/api/auth/login",{
+    btn.innerHTML= "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>";
+    const response = await fetch("https://modulo-inventario.herokuapp.com/api/auth/login",{
         method:'POST',
         body:JSON.stringify({
            usuario: user.value,
@@ -27,7 +27,7 @@ const fetchData = async () => {
     if(response.status==400){
         const {msg} = await response.json();
         alert(JSON.stringify(msg))
-
+        btn.innerHTML='Ingresar'
         user.value=''
         password.value=''
         almacen.value=0
@@ -35,8 +35,10 @@ const fetchData = async () => {
     } 
 
     const data = await response.json();
-    
+    //btn.innerHTML='Ingresar'
     console.log(data);
+    sessionStorage.setItem('idAlmacen',almacen.value);
+    sessionStorage.setItem('user',data.user);
 
     window.location.href='dashboard.html'
 
@@ -45,7 +47,7 @@ const fetchData = async () => {
 btn.onclick = fetchData
 
 const loadData = async () => {
-    const response = await fetch("http://localhost:5000/api/almacenes",{
+    const response = await fetch("https://modulo-inventario.herokuapp.com/api/almacenes",{
         method:'GET',
         headers:{
             'Content-Type': 'application/json'

@@ -10,16 +10,18 @@
 </head>
 <body>
     <div class="nav">
-        <h2>Registro de nuevo proveedor</h2>
+        <h2>Aumentar/ disminuir stock</h2>
         <button id="backButton" class="btn">Volver</button>
     </div>
     <div class="form-container">
-        <input type="text" class="input" id="nombre" placeholder="Nombre del proveedor" autocomplete="off">
-        <input type="text" class="input" id="direccion" placeholder="Direccion" autocomplete="off">
-        <button type="button" class="input btn-register" id="registrar">Registrar</button>
+        <select id="producto" class="input">
+            <option value="0" selected disabled>Seleccione un producto</option>
+        </select>
+        <input type="number" class="input" id="stock" placeholder="Cantidad" min="0">
+        <button type="button" class="input btn-register" id="btnRegister">Guardar</button>
     </div>
 
     <script src="main.js"></script>
-    <script src="nuevo_proveedor.js"></script>
+    <script src="ingreso_salida_producto.js"></script>
 </body>
 </html>

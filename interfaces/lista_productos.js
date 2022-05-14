@@ -1,3 +1,17 @@
+(function(){
+
+    if(!sessionStorage.getItem('idAlmacen')){
+        document.body.innerHTML=`
+        <h1> Debe iniciar sesion primero </h1>
+        <a href='index.html'>Ir al login </a>
+        `
+        //alert("Debe iniciar sesion primero");
+        //window.location.href='index.html';
+        return;
+    }
+})()
+
+
 const lista = document.getElementById('listaProductos');
 const updateForm = document.getElementById('updateForm');
 const updateBtn = document.getElementById('update');
@@ -12,7 +26,9 @@ let productos;
 let idProducto;
 
 const loadData = async () => {
-    const response = await fetch('http://localhost:5000/api/productos',{
+    const almacen = localStorage.getItem("idAlmacen")
+
+    const response = await fetch(`https://modulo-inventario.herokuapp.com/api/productos/${almacen}`,{
         method:'GET',
         headers:{
             'Content-Type': 'application/json'
@@ -50,7 +66,7 @@ const loadData = async () => {
             descripcion.value = productos[i].descripcion
             unidad.value = productos[i].unid_medida
             precio.value = productos[i].precio
-            updateForm.style.display='initial';
+            updateForm.style.opacity='1';
         }
 
         deleteBtn.onclick = async () => {
@@ -58,7 +74,7 @@ const loadData = async () => {
 
             const confirmarEliminar = confirm("¿Realmente desea eliminar este producto?")
             if(confirmarEliminar){
-                const response = await fetch(`http://localhost:5000/api/productos/${ parseInt(idProducto) }`,{
+                const response = await fetch(`https://modulo-inventario.herokuapp.com/api/productos/${ parseInt(idProducto) }`,{
                     method:'DELETE',
                     headers:{
                         'Content-Type': 'application/json'
@@ -89,8 +105,7 @@ updateBtn.onclick = async() =>{
 
     if(isNaN(precio.value)) return alert("El precio debe ser un valor valido")
 
-    console.log(`http://localhost:5000/api/productos/${parseInt(idProducto)}`);
-    const response = await fetch(`http://localhost:5000/api/productos/${parseInt(idProducto)}`,{
+    const response = await fetch(`https://modulo-inventario.herokuapp.com/api/productos/${parseInt(idProducto)}`,{
         method:'PUT',
         body:JSON.stringify(body),
         headers:{

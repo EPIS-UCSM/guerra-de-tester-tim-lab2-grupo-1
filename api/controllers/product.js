@@ -6,8 +6,10 @@ const Producto = require("../models/producto");
 
 module.exports={
     getProducts: async (req = request, res = response) => {
+        const { id } = req.params
+
         try {
-            const data = await Producto.listar();
+            const data = await Producto.listar(id);
 
             return res.json({
                 data

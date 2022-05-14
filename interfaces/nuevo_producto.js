@@ -1,3 +1,17 @@
+(function(){
+
+    if(!sessionStorage.getItem('idAlmacen')){
+        document.body.innerHTML=`
+        <h1> Debe iniciar sesion primero </h1>
+        <a href='index.html'>Ir al login </a>
+        `
+        //alert("Debe iniciar sesion primero");
+        //window.location.href='index.html';
+        return;
+    }
+})()
+
+
 const nombre = document.getElementById('nombre');
 const descripcion = document.getElementById('descripcion');
 const unidad = document.getElementById('unidad');
@@ -8,7 +22,7 @@ const precio = document.getElementById('precio');
 const btnRegistrar = document.getElementById('registrar');
 
 (async () => {
-    const response = await fetch('http://localhost:5000/api/proveedores',{
+    const response = await fetch('https://modulo-inventario.herokuapp.com/api/proveedores',{
         method:'GET',
         headers:{
             'Content-Type': 'application/json'
@@ -30,13 +44,15 @@ const btnRegistrar = document.getElementById('registrar');
 
 
 btnRegistrar.onclick = () => {
+
+    const almacen = localStorage.getItem('idAlmacen');
     
     const body = {
         nombre:nombre.value,
         descripcion:descripcion.value,
         unidad:unidad.value,
         proveedor:parseInt(proveedor.value),
-        almacen:1,
+        almacen,
         stock:parseInt(stock.value),
         precio:parseFloat(precio.value)
     };
@@ -56,7 +72,7 @@ btnRegistrar.onclick = () => {
 
         
         alert("Producto registrado")
-        window.location.href = './dashboard.html'
+        //window.location.href = './dashboard.html'
 
     } catch (error) {
         console.log(error);
@@ -66,7 +82,7 @@ btnRegistrar.onclick = () => {
 const saveData = async (body = {}) => {
 
    try {
-        const response = await fetch('http://localhost:5000/api/productos',{
+        const response = await fetch('https://modulo-inventario.herokuapp.com/api/productos',{
             method:'POST',
             body:JSON.stringify(body),
             headers:{

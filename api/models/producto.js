@@ -35,12 +35,12 @@ module.exports = class {
         }
     }
 
-    static async listar(){
+    static async listar(id){
         try {
             const rows = await query(`select p.id,p.nombre,p.descripcion,p.unid_medida,p.precio, pa.stock, pr.nombre 'proveedor' 
             from producto p 
             inner join proveedor pr on p.id_proveedor = pr.id 
-            inner join producto_almacen pa on p.id = pa.id_producto and pa.id_almacen = 1 
+            inner join producto_almacen pa on p.id = pa.id_producto and pa.id_almacen = ${ id } 
             where p.estado = 1`)
 
             return rows

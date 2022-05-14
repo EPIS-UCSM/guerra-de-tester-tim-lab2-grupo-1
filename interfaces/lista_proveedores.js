@@ -1,8 +1,21 @@
+(function(){
+
+    if(!sessionStorage.getItem('idAlmacen')){
+        document.body.innerHTML=`
+        <h1> Debe iniciar sesion primero </h1>
+        <a href='index.html'>Ir al login </a>
+        `
+        //alert("Debe iniciar sesion primero");
+        //window.location.href='index.html';
+        return;
+    }
+})()
+
 const lista = document.getElementById('listaProveedores');
 
 
 const loadData = async () => {
-    const response = await fetch('http://localhost:5000/api/proveedores',{
+    const response = await fetch('https://modulo-inventario.herokuapp.com/api/proveedores',{
         method:'GET',
         headers:{
             'Content-Type': 'application/json'

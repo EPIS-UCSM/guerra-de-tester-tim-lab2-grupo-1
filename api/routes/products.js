@@ -7,7 +7,7 @@ const { existeProductoId, existeAlmacenId } = require('../helpers/dbValidator');
 
 const router = Router();
 
-router.get('/', getProducts );
+router.get('/:id', getProducts );
 
 router.post('/',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),

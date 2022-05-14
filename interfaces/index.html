@@ -4,28 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
     <title>Login</title>
 </head>
 <body>
-    <style>
-        .container{
-            border: 1px solid gray;
-            padding: 20px;
-            display:flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 10px;
-        }
-    </style>
     <div class="container">
-        <input type="text" id="user" placeholder="usuario" autocomplete="off">
-        <input type="password" id="password" placeholder="password">
-        <select id="almacen">
+        <input class="input" type="text" id="user" placeholder="usuario" autocomplete="off">
+        <input class="input" type="password" id="password" placeholder="password">
+        <select class="input" id="almacen">
             <option value="0" selected disabled>Seleccione un almacen</option>
         </select>
-        <button type="button" id="btn">Ingresar</button>
+        <button class="btn" type="button" id="btn">
+            
+            Ingresar
+        </button>
     </div>
-
+    <script src="main.js"></script>
     <script src="login.js"></script>
 </body>
 </html>

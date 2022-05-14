@@ -1,7 +1,23 @@
+(function(){
+
+    if(!sessionStorage.getItem('idAlmacen')){
+        document.body.innerHTML=`
+        <h1> Debe iniciar sesion primero </h1>
+        <a href='index.html'>Ir al login </a>
+        `
+        //alert("Debe iniciar sesion primero");
+        //window.location.href='index.html';
+        return;
+    }
+})()
+
+
+
 const nombre = document.getElementById('nombre');
 const direccion = document.getElementById('direccion');
 
 const btnRegistrar = document.getElementById('registrar');
+
 
 btnRegistrar.onclick = () => {
     
@@ -30,7 +46,7 @@ btnRegistrar.onclick = () => {
 
 const saveData = async (body = {}) => {
 
-    const response = await fetch('http://localhost:5000/api/proveedores',{
+    const response = await fetch('https://modulo-inventario.herokuapp.com/api/proveedores',{
         method:'POST',
         body:JSON.stringify(body),
         headers:{
