@@ -5,8 +5,6 @@
         <h1> Debe iniciar sesion primero </h1>
         <a href='index.html'>Ir al login </a>
         `
-        //alert("Debe iniciar sesion primero");
-        //window.location.href='index.html';
         return;
     }
 })()
@@ -45,7 +43,7 @@ const btnRegistrar = document.getElementById('registrar');
 
 btnRegistrar.onclick = () => {
 
-    const almacen = localStorage.getItem('idAlmacen');
+    const almacen = sessionStorage.getItem('idAlmacen');
     
     const body = {
         nombre:nombre.value,
@@ -64,15 +62,15 @@ btnRegistrar.onclick = () => {
 
     if(isNaN(parseInt(stock.value)) || isNaN(parseFloat(precio.value)))
         return alert("El stock y el precio deben ser un numero")
+    
+    if(proveedor.value == '0') return alert("Seleccione un proveedor")
 
     try {
 
         saveData(body);
-
-
-        
         alert("Producto registrado")
-        //window.location.href = './dashboard.html'
+
+        window.location.href = 'dashboard.html'
 
     } catch (error) {
         console.log(error);

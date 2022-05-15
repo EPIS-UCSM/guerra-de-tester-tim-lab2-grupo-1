@@ -26,7 +26,7 @@ let productos;
 let idProducto;
 
 const loadData = async () => {
-    const almacen = localStorage.getItem("idAlmacen")
+    const almacen = sessionStorage.getItem("idAlmacen")
 
     const response = await fetch(`https://modulo-inventario.herokuapp.com/api/productos/${almacen}`,{
         method:'GET',
