@@ -12,11 +12,11 @@ router.get('/:id', getProducts );
 router.post('/',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
     check('descripcion','El campo debe ser una cadena de texto').isString(),
-    check('unidad','La unidad de medida es obligatoria').not().isEmpty(),
+    check('unidad','La unidad de medida es obligatoria').not().isNumeric(),
     check('proveedor','El proveedor es necesario').not().isEmpty(),
     check('almacen').isNumeric(),
-    check('stock').isNumeric(),
-    check('precio').isNumeric(),
+    check('stock','El stock no puede ser negativo').isInt({ min: 0 }),
+    check('precio','El precio no puede ser negativo').isFloat({ min: 0 }),
     validarCampos //Captura todos los errores y los muestra
 ], postProduct );
 
@@ -25,9 +25,9 @@ router.put('/:id',[
     check( 'id' ).custom( existeProductoId ),
     check('nombre','El campo es obligatorio').not().isEmpty(),
     check('descripcion','El campo es obligatorio').not().isEmpty(),
-    check('unidad','El campo es obligatorio').not().isEmpty(),
+    check('unidad','El campo es obligatorio').isString(),
     check('precio','El campo es obligatorio').not().isEmpty(),
-    check('precio','El campo debe ser numerico').isNumeric(),
+    check('precio','El campo debe ser numerico y no negativo').isFloat({ min: 0 }),
     validarCampos
 ], putProduct )
 
@@ -42,7 +42,7 @@ router.put('/',[
     check('producto').custom(existeProductoId),
     check('almacen').isNumeric(),
     check('almacen').custom(existeAlmacenId),
-    check('cantidad').isNumeric(),
+    check('cantidad','La cantidad no puede ser negativa').isInt({ min: 0 }),
     validarCampos
 ],putStock)
 

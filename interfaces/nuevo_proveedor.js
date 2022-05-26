@@ -25,19 +25,26 @@ btnRegistrar.onclick = () => {
         nombre:nombre.value,
         direccion:direccion.value
     };
-    if(!isNaN(parseInt(nombre.value)) || !isNaN(parseInt(direccion.value))){
+
+
+    
+    if(nombre.value.length < 1 || direccion.value.length < 1 ) {
+        return alert("Debe llenar los campos")
+    }
+    if(!isNaN(nombre.value) || !isNaN(direccion.value)){
         nombre.focus()
+        
         return alert("Los valores de los campos deben ser cadenas de texto validas")
     }
 
     try {
 
-        saveData(body);
+        //saveData(body);
 
         nombre.value=''
         direccion.value=''
         alert("Proveedor registrado")
-        window.location.href = './dashboard.html'
+        //window.location.href = './dashboard.html'
 
     } catch (error) {
         console.log(error);

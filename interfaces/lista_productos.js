@@ -44,7 +44,7 @@ const loadData = async () => {
     for (let i=0; i < data.data.length; i ++ ) {
         const tr = document.createElement('TR')
         tr.innerHTML=`
-            <td>${ data.data[i].id }</td>
+            <td>${ i + 1 }</td>
             <td>${ data.data[i].nombre }</td>
             <td>${ data.data[i].descripcion }</td>
             <td>${ data.data[i].unid_medida}</td>
@@ -102,7 +102,16 @@ updateBtn.onclick = async() =>{
         unidad:unidad.value,
         precio:parseFloat(precio.value)
     }
+    if( nombre.value.length < 1    || unidad.value.length < 1 || precio.value.length < 1 ) {
+        return alert("Los campos estan vacios")
+    }
 
+    if( !isNaN(unidad.value) ){
+        return alert("Revise los datos ingresados")
+    }
+
+
+    if(parseFloat(precio.value) < 0 ) return alert("EL valor del precio no puede ser negativo")
     if(isNaN(precio.value)) return alert("El precio debe ser un valor valido")
 
     const response = await fetch(`https://modulo-inventario.herokuapp.com/api/productos/${parseInt(idProducto)}`,{

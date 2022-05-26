@@ -56,13 +56,25 @@ btnRegistrar.onclick = () => {
     };
     console.log(body);
 
-    if(!isNaN(parseInt(nombre.value)) || !isNaN(parseInt(descripcion.value)) || !isNaN(parseInt(unidad.value))){
+    
+    if( nombre.value.length < 1    || unidad.value.length < 1 || 
+        stock.value.length < 1     || precio.value.length < 1 ) {
+        return alert("Los campos estan vacios")
+    }
+
+    if( !isNaN(unidad.value) ){
         return alert("Revise los datos ingresados")
     }
 
-    if(isNaN(parseInt(stock.value)) || isNaN(parseFloat(precio.value)))
-        return alert("El stock y el precio deben ser un numero")
-    
+    if(isNaN(stock.value) || isNaN(precio.value)){
+        return alert("El stock y/o el precio deben ser un numero")
+    }
+
+    console.log(stock.value < 0);
+    if( parseInt(stock.value) < 0  || parseFloat(precio.value) < 0 ){
+        return alert('El stock y/o el precio no pueden ser numeros negativos')
+    }
+
     if(proveedor.value == '0') return alert("Seleccione un proveedor")
 
     try {
@@ -70,7 +82,7 @@ btnRegistrar.onclick = () => {
         saveData(body);
         alert("Producto registrado")
 
-        window.location.href = 'dashboard.html'
+        window.location.href = 'lista_productos.html'
 
     } catch (error) {
         console.log(error);
@@ -93,7 +105,7 @@ const saveData = async (body = {}) => {
         else console.log(data.msg);
 
    } catch (error) {
-       console.log(data.err);
+       console.log(data.error);
    }
 
 }

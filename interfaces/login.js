@@ -36,7 +36,7 @@ const fetchData = async () => {
 
     const data = await response.json();
     //btn.innerHTML='Ingresar'
-    console.log(data);
+    
     sessionStorage.setItem('idAlmacen',almacen.value);
     sessionStorage.setItem('user',data.user);
 

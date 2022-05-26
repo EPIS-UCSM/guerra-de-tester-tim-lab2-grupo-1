@@ -19,7 +19,7 @@ const btnRegister = document.getElementById('btnRegister');
 let cantidad = 0;
 
 let productos;
-const almacen = localStorage.getItem('idAlmacen');
+const almacen = sessionStorage.getItem('idAlmacen');
 
 const loadData = async () => {
 
@@ -78,6 +78,7 @@ btnRegister.onclick = async ()=> {
     console.log(data.data);
     console.log(body);
 
+    alert('Stock modificado con exito')
     window.location.href='lista_productos.html'
 }
 

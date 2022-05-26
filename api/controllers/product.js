@@ -24,6 +24,7 @@ module.exports={
         try {
             const { nombre, descripcion, unidad, proveedor, almacen, stock, precio } = req.body
 
+
             await Producto.registrar({ nombre, descripcion, unidad, proveedor, almacen, stock, precio })
 
             return res.json({
